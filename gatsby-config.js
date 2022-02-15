@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    title: `OBH Public Directory`,
+    description: ``,
+    author: `https://www.dimagi.com`,
+    siteUrl: `https://www.github.com/dimagi/obh-public-directory`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
