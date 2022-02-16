@@ -1,0 +1,16 @@
+name: build-and-deploy
+on:
+  push:
+    branches:
+      - test-workflows
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - run: npm install -g gatsby-cli
+      - run: npm install
+      - run: gatsby build
