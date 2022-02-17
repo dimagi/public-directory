@@ -1,10 +1,11 @@
-name: build-and-deploy
+# Automatic build and deploy on any push to main.
 # Largely built off of sample from: https://docs.github.com/en/actions/deployment/
 # security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
+name: build-and-deploy
 on:
   push:
     branches:
-      - test-workflows
+      - main
 env:
   BUCKET_NAME : "co-obh-public-directory"
   AWS_REGION : "us-east-1"
