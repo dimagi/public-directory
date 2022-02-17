@@ -1,0 +1,15 @@
+# Runs on any new commit or commits pushed to any branch. Intended for testing new 
+# changes before merging to master (build status will show next to commit).
+name: run-test-build
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - run: npm install -g gatsby-cli
+      - run: npm install
+      - run: gatsby build
