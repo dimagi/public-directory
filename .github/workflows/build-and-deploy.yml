@@ -6,7 +6,7 @@ on:
     branches:
       - test-workflows
 env:
-  BUCKET_NAME : "co-obh-public-dir-test"
+  BUCKET_NAME : "co-obh-public-directory"
   AWS_REGION : "us-east-1"
 jobs:
   build-and-deploy:
