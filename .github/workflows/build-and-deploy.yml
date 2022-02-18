@@ -1,0 +1,40 @@
+# Automatic build and deploy on any push to main.
+# Largely built off of sample from: https://docs.github.com/en/actions/deployment/
+# security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
+name: build-and-deploy
+on:
+  push:
+    branches:
+      - main
+env:
+  BUCKET_NAME : "co-obh-public-directory"
+  AWS_REGION : "us-east-1"
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    # Get JWT token from GitHub's OIDC provider
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Clone the repo
+        uses: actions/checkout@v2
+      - name: Install node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Install Gatsby CLI
+        run: npm install -g gatsby-cli
+      - name: npm install
+        run: npm install
+      - name: gatsby build
+        run: gatsby build
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::731870575956:role/CO-OBH-PublicDirectoryOIDC
+          role-session-name: CO-OBH-Public-Dir-Push
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Copy /public folder to s3
+        run: |
+          aws s3 cp ./public s3://${{ env.BUCKET_NAME }}/ --recursive
