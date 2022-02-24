@@ -9,6 +9,7 @@ on:
 env:
   BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
   AWS_REGION: ${{ secrets.AWS_REGION }}
+  ROLE_ARN: ${{ secrets.AWS_BUCKET_PUSH_ROLE_ARN }}
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -32,7 +33,7 @@ jobs:
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam::731870575956:role/CO-OBH-PublicDirectoryOIDC
+          role-to-assume: ${{ env.ROLE_ARN }}
           role-session-name: CO-OBH-Public-Dir-Push
           aws-region: ${{ env.AWS_REGION }}
       - name: Copy /public folder to s3
