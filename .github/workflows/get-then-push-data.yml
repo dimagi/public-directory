@@ -24,7 +24,8 @@ jobs:
     steps:
       - name: Get data from the HQ API
         run: |
-          curl -H "Authorization: ApiKey ${{ secrets.ADDISONS_TEST_API_USERNAME }}:${{ secrets.ADDISONS_TEST_HQ_API_KEY }}" 'https://www.commcarehq.org/a/${{ secrets.PROJECT_NAME }}/api/v0.5/configurablereportdata/${{ secrets.REPORT_ID }}/' >> directory_data.json
+          curl -H "Authorization: ApiKey ${{ secrets.ADDISONS_TEST_API_USERNAME }}:${{ secrets.ADDISONS_TEST_HQ_API_KEY }}" \
+          'https://www.commcarehq.org/a/${{ secrets.PROJECT_NAME }}/api/v0.5/configurablereportdata/${{ secrets.REPORT_ID }}/' >> directory_data.json
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
