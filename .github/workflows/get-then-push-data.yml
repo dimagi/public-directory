@@ -25,13 +25,13 @@ jobs:
     steps:
       - name: Get data from the HQ API
         run: |
-          curl "Authorization: ApiKey ${{ secrets.ADDISONS_TEST_API_USERNAME }}:${{ secrets.ADDISONS_TEST_HQ_API_KEY }}" '${{env.REPORT_URL}}' >> directory_data.json
+          curl -H "Authorization: ApiKey ${{ secrets.ADDISONS_TEST_API_USERNAME }}:${{ secrets.ADDISONS_TEST_HQ_API_KEY }}" '${{env.REPORT_URL}}' >> directory_data.json
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: arn:aws:iam::731870575956:role/CO-OBH-PublicDirectoryOIDC
           role-session-name: CO-OBH-Public-Dir-Push
           aws-region: ${{ env.AWS_REGION }}
-      - name: Copy /public folder to s3
+      - name: Copy data file to s3
         run: |
           aws s3 cp directory_data.json s3://${{ env.BUCKET_NAME }}/
