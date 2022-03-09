@@ -31,5 +31,6 @@ module.exports = {
         icon: `src/images/flower-icon.png`,
       },
     },
+    `obh-providers`,
   ],
 }
