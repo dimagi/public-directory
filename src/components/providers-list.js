@@ -2,12 +2,12 @@ import * as React from "react"
 
 import ProviderTile from "./provider-tile"
 
-const ProvidersList = () => {
+const ProvidersList = ({ providers }) => {
   return (
     <div>
       <h2>Healthcare Providers</h2>
-      {["Mercy Hospital", "Jackson"].map((providerName, index) => (
-        <ProviderTile providerName={providerName}/>
+      {providers.map(provider => (
+        <ProviderTile provider={provider}/>
       ))}
     </div>
   )
