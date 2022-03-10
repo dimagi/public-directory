@@ -14,11 +14,14 @@ import "./layout.css"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
+    {
       site {
         siteMetadata {
           title
         }
+      }
+      footerText: markdownRemark(frontmatter: {slug: {eq: "footer-text"}}) {
+          html
       }
     }
   `)
@@ -34,8 +37,8 @@ const Layout = ({ children }) => {
         }}
       >
         <main>{children}</main>
-        <footer style={{marginTop: `2rem`}}>
-          Built by <a href="https://www.dimagi.com">Dimagi</a>
+        <footer style={{marginTop: `2rem`}}
+                dangerouslySetInnerHTML={{ __html: data.footerText.html }}>
         </footer>
       </div>
     </>
