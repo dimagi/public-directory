@@ -10,7 +10,8 @@ function getLocalData(){
 }
 
 function getProductionData(){
-    throw "FIXME"
+    // TODO
+    return getLocalData()
 }
 
 exports.sourceNodes = async ({
