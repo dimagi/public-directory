@@ -1,23 +1,31 @@
 import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import { graphql } from 'gatsby'
 
 import Layout from "../components/layout"
+import ProvidersList from "../components/providers-list"
 import Seo from "../components/seo"
 
-const IndexPage = () => (
+const IndexPage = ({ data }) => (
   <Layout>
     <Seo title="Public Directory" />
-    <h1>Public Directory</h1>
-    <h2>Under Construction</h2>
-    <p>Please excuse our dust</p>
-    <p>
-      <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/using-typescript/">Go to "Using TypeScript"</Link> <br />
-      <Link to="/using-ssr">Go to "Using SSR"</Link> <br />
-      <Link to="/using-dsg">Go to "Using DSG"</Link>
-    </p>
+    <div dangerouslySetInnerHTML={{ __html: data.mainPageBlurb.html }} />
+    <ProvidersList providers={ data.allObhProvider.nodes }/>
   </Layout>
 )
+
+export const query = graphql`
+  {
+    allObhProvider {
+      nodes {
+        id
+        name
+        description
+      }
+    }
+    mainPageBlurb: markdownRemark(frontmatter: {slug: {eq: "main-page-blurb"}}) {
+        html
+    }
+  }
+`
 
 export default IndexPage

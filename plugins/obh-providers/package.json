@@ -1,0 +1,7 @@
+{
+  "name": "obh-providers",
+  "version": "1.0.0",
+  "description": "Sources a list of OBH providers from CommCareHQ",
+  "main": "index.js",
+  "scripts": {}
+}
