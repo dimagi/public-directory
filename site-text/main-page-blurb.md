@@ -2,4 +2,6 @@
 slug: "main-page-blurb"
 ---
 
-Pardon our dust
+<h1>Pardon our dust</h1>
+
+But keep us [company](link)
